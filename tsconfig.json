@@ -1,11 +1,10 @@
 {
     "compilerOptions": {
         "target": "ES6",
-        "jsx": "react",
-        "module": "es2020",
+        "module": "CommonJS",
         "moduleResolution": "node",
         "declaration": true,
-        "outDir": "./dist",
+        "outDir": "./build",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "useUnknownInCatchVariables": false,
@@ -15,8 +14,6 @@
         "allowJs": true,
         "baseUrl": ".",
         "resolveJsonModule": true,
-        "paths": {
-            "@/*": ["./src/*"]
-        },
-    }
+    },
+    "include": ["src/**/*"]
 }
