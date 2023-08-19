@@ -3,11 +3,12 @@ import mongoose from 'mongoose';
 import Guest from '../models/Guests';
 
 const createGuest = (req: Request, res: Response, next: NextFunction) => {
-    const { name, numberOfGuests, gender, status, drinks } = req.body;
+    const { name, guests, numberOfGuests, gender, status, drinks } = req.body;
 
     const newGuest = new Guest({
         guest_id: new mongoose.Types.ObjectId(),
         name,
+        guests,
         numberOfGuests,
         status,
         gender,
@@ -55,9 +56,22 @@ const updateGuest = (req: Request, res: Response, next: NextFunction) => {
         .catch(error => res.status(500).json({ error }));
 };
 
+const getGuestByID = (req: Request, res: Response, next: NextFunction) => {
+    const { _id } = req.query;
+
+    return Guest.findById(_id)
+        .then(guest =>
+            guest
+                ? res.status(200).json({ guest })
+                : res.status(404).json(undefined),
+        )
+        .catch(error => res.status(500).json({ error }));
+};
+
 export default {
     createGuest,
     getAllGuests,
     deleteGuest,
     updateGuest,
+    getGuestByID,
 };
